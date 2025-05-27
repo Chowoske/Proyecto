@@ -1,0 +1,23 @@
+Para CMD en Json
+curl "http://localhost/videojuegos/videojuegos.php?pagina=1&formato=json"
+
+Para Json en Web
+http://localhost/videojuegos/videojuegos.php?pagina=1&formato=json
+
+
+Para el Api
+curl "http://localhost/videojuegos/api_videojuegos.php"
+
+
+http://localhost/videojuegos/api_videojuegos.php
+
+Get en Api
+curl http://localhost/videojuegos/api_videojuegos.php
+Post en Api
+curl -X POST http://localhost/videojuegos/api_videojuegos.php -H "Content-Type: application/json" -d "{\"id\":26,\"Name\":\"Nuevo Juego\",\"Price\":\"30 USD\",\"Release Date\":\"2025-01-01\",\"Gender\":\"Aventura, Puzzle\",\"Available In\":\"Steam, GOG\"}"
+Put en Api
+curl -X PUT http://localhost/videojuegos/api_videojuegos.php/26 -H "Content-Type: application/json" -d "{\"Name\":\"Juego Actualizado\",\"Price\":\"25 USD\",\"Release Date\":\"2025-06-01\",\"Gender\":\"Aventura, Acción\",\"Available In\":\"Steam, Epic Games\"}"
+Delate en Api
+curl -X DELETE http://localhost/videojuegos/api_videojuegos.php/26
+Get de solo un Id
+curl http://localhost/videojuegos/api_videojuegos.php/26
