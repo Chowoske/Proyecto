@@ -1,13 +1,46 @@
+Descripción general
+Este proyecto contiene dos APIs desarrolladas en PHP que permiten gestionar datos de videojuegos y mostrar tweets relacionados.
+Cada API trabaja con archivos JSON para almacenar y recuperar información, y ofrece endpoints REST para realizar operaciones comunes como obtener, agregar, actualizar y eliminar datos.
+
+API de Videojuegos
+¿Qué es?
+Una API REST basada en PHP que permite gestionar una base de datos de videojuegos almacenada en un archivo data.json.
+La API permite listar videojuegos, consultar detalles, agregar nuevos juegos, actualizar datos y eliminar juegos.
+
+Campos principales de cada videojuego
+id: Identificador único numérico.
+Name: Nombre del videojuego.
+Price: Precio (ej. "20 USD" o "Gratis").
+Release Date: Fecha de lanzamiento.
+Gender: Género o categoría del juego.
+Available In: Plataformas donde está disponible.
+
+Endpoints disponibles
+GET /api_videojuegos.php
+Obtiene la lista completa de videojuegos.
+
+GET /api_videojuegos.php/{id}
+Obtiene un videojuego específico por su id.
+
+POST /api_videojuegos.php
+Agrega un nuevo videojuego. Debe enviarse un JSON con al menos los campos Name y Price.
+
+PUT /api_videojuegos.php/{id}
+Actualiza los datos del videojuego con el ID especificado.
+
+DELETE /api_videojuegos.php/{id}
+Elimina el videojuego con el ID especificado.
+
+
+
 Para CMD en Json
 curl "http://localhost/videojuegos/videojuegos.php?pagina=1&formato=json"
 
 Para Json en Web
 http://localhost/videojuegos/videojuegos.php?pagina=1&formato=json
 
-
 Para el Api
 curl "http://localhost/videojuegos/api_videojuegos.php"
-
 
 http://localhost/videojuegos/api_videojuegos.php
 
@@ -21,3 +54,46 @@ Delate en Api
 curl -X DELETE http://localhost/videojuegos/api_videojuegos.php/26
 Get de solo un Id
 curl http://localhost/videojuegos/api_videojuegos.php/26
+
+Tecnología utilizada
+PHP para la lógica de la API.
+
+Archivo JSON (data.json) para almacenamiento de datos.
+
+Soporta métodos HTTP GET, POST, PUT, DELETE.
+
+Permite CORS para facilitar acceso desde diferentes orígenes.
+
+
+
+
+
+
+API de Twitter
+¿Qué es?
+Una API que obtiene tweets relacionados con videojuegos desde Twitter y los almacena localmente en un archivo JSON (tweets.json).
+Permite consultar esos tweets mediante peticiones POST y devuelve un arreglo con el texto de cada tweet.
+
+Campos principales de cada tweet
+texto: Contenido del tweet (texto plano).
+
+Endpoints disponibles
+POST /twitter.php
+Solicita obtener los tweets almacenados. Se envía un JSON con la acción a realizar (ej. {"accion":"obtener"}), y la API responde con un arreglo de tweets.
+
+Tecnología utilizada
+PHP para la API.
+Archivo JSON (tweets.json) para almacenamiento de tweets.
+Python para obtener los tweets desde la API oficial de Twitter y generar el archivo JSON localmente.
+Soporta peticiones POST con cuerpo JSON.
+CORS habilitado.
+
+
+
+
+Cómo usar
+Clonar o descargar el repositorio.
+Configurar y ejecutar el script Python para obtener tweets de Twitter.
+Utilizar los endpoints de cada API para gestionar videojuegos o consultar tweets.
+Realizar peticiones HTTP desde clientes como Postman, Thunder Client o navegadores con fetch/AJAX.
+
