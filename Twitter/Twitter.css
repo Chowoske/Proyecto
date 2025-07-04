@@ -1,0 +1,23 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f9f9f9;
+    padding: 20px;
+}
+
+.tweet {
+    background: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.username {
+    color: #1DA1F2;
+    font-weight: bold;
+}
+
+.date {
+    color: #888;
+    font-size: 0.9em;
+}
