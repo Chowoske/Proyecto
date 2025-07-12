@@ -1,0 +1,201 @@
+openapi: 3.0.4
+info:
+  title: API de Videojuegos
+  description: >
+    API REST en PHP para gestionar una lista de videojuegos.
+    Permite crear, leer, actualizar y eliminar videojuegos guardados en un archivo JSON.
+  version: 1.0.0
+servers:
+  - url: http://localhost/videojuegos
+paths:
+  /api_videojuegos.php:
+    get:
+      summary: Obtener lista de videojuegos o videojuego específico por ID
+      description: Retorna todos los videojuegos o uno específico si se indica ID en la URL.
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          required: false
+          description: ID del videojuego a obtener
+      responses:
+        '200':
+          description: Lista de videojuegos o videojuego específico
+          content:
+            application/json:
+              schema:
+                oneOf:
+                  - type: array
+                    items:
+                      $ref: '#/components/schemas/Videojuego'
+                  - $ref: '#/components/schemas/Videojuego'
+        '404':
+          description: Juego no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorJuegoNoEncontrado'
+    post:
+      summary: Crear un nuevo videojuego
+      description: Agrega un nuevo videojuego a la lista
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideojuegoInput'
+      responses:
+        '201':
+          description: Videojuego creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Videojuego'
+        '400':
+          description: Datos inválidos o incompletos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPost400'
+    put:
+      summary: Actualizar un videojuego
+      description: Actualiza datos de un videojuego existente (se requiere ID en URL)
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID del videojuego a actualizar
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VideojuegoInput'
+      responses:
+        '200':
+          description: Videojuego actualizado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Videojuego'
+        '400':
+          description: Se requiere ID para actualizar
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorPut400'
+        '404':
+          description: Juego no encontrado para actualizar
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorJuegoNoEncontrado'
+    delete:
+      summary: Eliminar un videojuego
+      description: Elimina un videojuego por su ID
+      parameters:
+        - in: query
+          name: id
+          schema:
+            type: integer
+          required: true
+          description: ID del videojuego a eliminar
+      responses:
+        '204':
+          description: Videojuego eliminado exitosamente
+        '400':
+          description: Falta ID para eliminar
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorDelete400'
+        '404':
+          description: Juego no encontrado para eliminar
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorJuegoNoEncontrado'
+
+components:
+  schemas:
+    Videojuego:
+      type: object
+      required:
+        - id
+        - Name
+        - Price
+        - Release Date
+        - Gender
+        - Available In
+      properties:
+        id:
+          type: integer
+          example: 1
+        Name:
+          type: string
+          example: "Celeste"
+        Price:
+          type: string
+          example: "20 USD"
+        Release Date:
+          type: string
+          format: date
+          example: "2018-01-25"
+        Gender:
+          type: string
+          example: "Plataformas, Aventura"
+        Available In:
+          type: string
+          example: "Steam, Epic Games Store, Nintendo eShop, PlayStation Store, Xbox Store"
+    VideojuegoInput:
+      type: object
+      required:
+        - Name
+        - Price
+      properties:
+        Name:
+          type: string
+          example: "Celeste"
+        Price:
+          type: string
+          example: "20 USD"
+        Release Date:
+          type: string
+          format: date
+          example: "2018-01-25"
+        Gender:
+          type: string
+          example: "Plataformas, Aventura"
+        Available In:
+          type: string
+          example: "Steam, Epic Games Store, Nintendo eShop, PlayStation Store, Xbox Store"
+    ErrorJuegoNoEncontrado:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Juego no encontrado"
+    ErrorPost400:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Falta o está vacío el campo 'Name'; Falta o está vacío el campo 'Price'"
+        status:
+          type: integer
+          example: 400
+    ErrorPut400:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Se requiere ID para actualizar"
+    ErrorDelete400:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Se requiere ID para eliminar"
