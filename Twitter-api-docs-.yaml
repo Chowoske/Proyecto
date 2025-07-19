@@ -1,0 +1,78 @@
+openapi: 3.0.4
+info:
+  title: API de Twitter Local
+  description: >
+    API REST en PHP para gestionar tweets usando un archivo JSON.
+    Este endpoint permite crear nuevos tweets.
+  version: 1.0.0
+servers:
+  - url: http://localhost/videojuegos
+paths:
+  /twitter.php:
+    post:
+      summary: Crear un nuevo tweet
+      description: Agrega un nuevo tweet a la lista almacenada en un archivo JSON local.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TweetInput'
+      responses:
+        '201':
+          description: Tweet creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tweet'
+        '400':
+          description: Datos inválidos o incompletos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorTweet400'
+
+components:
+  schemas:
+    Tweet:
+      type: object
+      required:
+        - id
+        - author_id
+        - text
+        - created_at
+      properties:
+        id:
+          type: string
+          example: "1934566928980553806"
+        author_id:
+          type: string
+          example: "2340581"
+        text:
+          type: string
+          example: "La IA puede escribir obituarios, pero no reemplazar el sentimiento humano."
+        created_at:
+          type: string
+          format: date-time
+          example: "2025-06-16T11:01:13.000Z"
+    TweetInput:
+      type: object
+      required:
+        - author_id
+        - text
+      properties:
+        author_id:
+          type: string
+          example: "2340581"
+        text:
+          type: string
+          example: "Este es un nuevo tweet para pruebas locales"
+    ErrorTweet400:
+      type: object
+      properties:
+        error:
+          type: string
+          example: "Faltan campos requeridos: 'author_id' o 'text'"
+        status:
+          type: integer
+          example: 400
