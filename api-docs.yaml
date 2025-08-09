@@ -3,7 +3,13 @@ info:
   title: API de Videojuegos
   description: >
     API REST en PHP para gestionar una lista de videojuegos.
-    Permite crear, leer, actualizar y eliminar videojuegos guardados en un archivo JSON.
+    Permite crear, leer, actualizar y eliminar videojuegos guardados en un archivo JSON. 
+    ### Bloc1
+    - Angel David Garcia Hernandez 22652
+    - Kevin Joshua Iracheta
+    
+    [Proyecto.git](https://github.com/Chowoske/Proyecto)
+    
   version: 1.0.0
 servers:
   - url: http://localhost/videojuegos
