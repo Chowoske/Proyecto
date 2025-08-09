@@ -8,7 +8,7 @@ info:
     - Angel David Garcia Hernandez 22652
     - Kevin Joshua Lopez Iracheta  22710
     
-    [Proyecto.git](https://github.com/Chowoske/Proyecto)
+    [VideoJuegos.git](https://github.com/Chowoske/Proyecto)
     
   version: 1.0.0
 servers:
@@ -205,4 +205,5 @@ components:
         error:
           type: string
           example: "Se requiere ID para eliminar"
+
 
